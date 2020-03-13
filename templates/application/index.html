@@ -1,0 +1,53 @@
+{% load static %}
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Document</title>
+        <link rel="stylesheet" href="{% static 'bootstrap-4.3.1/css/bootstrap.css' %}">
+        <link rel="stylesheet" href="{% static 'font-awesome-4.7.0/css/font-awesome.min.css' %}">
+        <link rel="stylesheet" href="{% static 'css/style.css' %}?version=4">
+    </head>
+    <!-- LANDING PAGE FOR BUSITEMA ONLINE APPLICATION SYSTEM -->
+    <body style="background-image: url({% static 'img/landing.png' %}); background-repeat: no-repeat; background-attachment: fixed; background-size: cover;"></body>
+    <section>
+            <div class="container py-5">
+                <div class="row">
+                    <div class="col-md-3"><img src="{% static 'img/logo.png' %}" class="img-fluid" alt=""></div>
+                    <div class="col-md-6"></div>
+                    <div class="col-md-3">
+                        <div class="text-cexter" style="padding-top: 20px;">
+                            <a href="#" class="btn btn-primary">University Website</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    
+        <section class="py-5">
+            <div class="container">
+                <div class="row" style="padding-top: 100px;">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-8 text-center">
+                        <div>
+                            <h2 style="color: #ffca3e">Welcome to Busitema University Online Job Application</h2>
+                        </div>
+                        <div>
+                            <p class="text-justify text-white" style="font-size: 20px;">
+                                Application is for only jobs that have been advertised on radio, 
+                                TV, Newspapers, University Website and any reliable source
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-2"></div>
+                </div>
+                <div class="pt-5" style="text-align:center;">
+                    <a href="{% url 'home' %}" class="btn btn-primary rounded-pill">
+                        <b style="font-size: 20px;">Apply Now</b>
+                    </a>
+                </div>
+            </div>
+        </section>
+        </body>

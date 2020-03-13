@@ -1,0 +1,183 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<div class="container-fluid" id="nav-section-1"></div>
+<div class="container-fluid sticky-top" id="nav-section-2">
+    <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-12">
+            <nav class="navbar navbar-expand-sm">
+                <a href="#" class="navbar-brand font-weight-bold">
+                    <img src="{% static 'img/folder/logo.png' %}" height="85" alt="Busitema Logo">
+                </a>
+                <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
+                    <div class="navbar-nav mr-3">
+                        <a class="nav-item nav-link btn btn-primary" href="{% url 'home' %}">View Jobs</a>
+                    </div>
+                    <div class="navbar-nav">
+                        <a class="nav-item nav-link btn btn-primary" href="#">University Website</a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </div>
+</div>
+ <!-- DIRECTORATE OF HUMAN RESOURCE -->
+<section class="hero-wrap hero-wrap-2" style="background: url({% static 'img/Job.png' %})" data-stellar-background-ratio="0">
+<div class="container">
+    <div class="row no-gutters slider-text align-items-center justify-content-center">
+        <div class="col-md-9 ftco-animate text-center text-down">
+            <h1>Directorate of Human Resource</h1>
+            <h4>Job application</h4>
+        </div>
+    </div>
+</div>
+</section>
+            <!-- BODY -->
+            <section class="py-5">
+                    <div class="container">
+                        <div class="card mb-3 shadow">
+                           <div class="" style="background-color: black">
+                               <div class="text-center text-white">
+                                    <h2>JOB APPLICATION FORM</h2>
+                                    <p>Fill the form below accurately indicating your potentials and suitability 
+                                       to the job you are applying for.
+                                    </p>
+                               </div>
+                           </div>
+                            <div class="card-body">
+                                <div class="container">
+                                    {{ form.non_field_errors }}
+                                <form action="{% url 'submit_form' %}" method="POST">
+                                        {% csrf_token %}
+                                    <div class="form-row">
+                                        <!-- NAME SECTION -->
+                                        <!-- hidden position field -->
+                                        <div>
+                                                {{ form.position }}
+                                                {{ form.age }}
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div><h3>Name</h3></div>
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                                {{ form.first_name.errors }}
+                                                {{ form.first_name }}
+                                            <label for="{{ form.first_name.id_for_label }}">First Name</label>
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                                {{ form.last_name.errors }}
+                                                {{ form.last_name }}
+                                            <label for="{{ form.last_name.id_for_label }}">Last Name</label>
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                                {{ form.other_name.errors }}
+                                                {{ form.other_name }}
+                                            <label for="{{ form.other_name.id_for_label }}">Other Names</label>
+                                        </div>
+                                     </div>
+                                     <!-- GENDER -->
+                                     <div class="form-row">
+                                        <div class="col-md-3 ">
+                                            <h3>Gender</h3>
+                                        </div>
+                                        <div class="col-md-3 mb-3">
+                                                {{ form.gender.errors }}
+                                            
+                                            {{ form.gender }}
+                                           
+                                        </div>
+                                     </div>
+        
+                                     <!-- BIRTH DATE SECTION -->
+                                     <div class="form-row">
+                                        <div class="col-md-3">
+                                            <div><h3>Birth Date</h3></div>
+                                        </div>
+                                        <div class="form-group col-md-4 mb-3">
+                                                {{ form.date_of_birth.errors }}
+                                                {{ form.date_of_birth }}
+                                            <label for="{{ form.date_of_birth.id_for_label }}">Birth Date</label>
+                                        </div>
+                                     </div>
+                                     <!-- PHONE NUMBER SECTION -->
+                                     <div class="form-row">
+                                        <div class="col-md-3">
+                                            <div><h3>Phone Number</h3></div>
+                                        </div>
+                                        <div class="form-group col-md-4 mb-3">
+                                                {{ form.phone.errors }}
+                                                {{ form.phone }}
+                                            <label for="{{ form.phone.id_for_label }}">Phone Number</label>
+                                        </div>
+                                    </div>
+                                    <!-- EMAIL ADDRESS SECTION -->
+                                    <div class="form-row">
+                                        <div class="col-md-3">
+                                            <div><h3>Email Address</h3></div>
+                                        </div>
+                                        <div class="col-md-2"></div>
+                                        <div class="form-group col-md-7 mb-3">
+                                                {{ form.email_address.errors }}
+                                                {{ form.email_address }}
+                                            <label for="{{ form.email_address.id_for_label }}">Email Address</label>
+                                        </div>
+                                    </div>
+                                    <!-- Education Background -->
+                                    <div class="form-row">
+                                        <div class="col-md-5">
+                                            <div><h3>Education Background</h3></div>
+                                        </div>
+                                        <div class="col-md-7">
+                                            <div class="form-group">
+                                                    {{ form.educ_background.errors }}
+                                                    {{ form.educ_background }}
+                                                <label>Text area</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- JOB SKILLS & TRAINING -->
+                                    <div>
+                                        <h3> Other Training or Certifications</h3>
+                                    </div>
+                                    <div class="form-row">
+                                            <div class="col-md-9">
+                                                <div class="form-group">
+                                                        {{ form.training.errors }}
+                                                        {{ form.training }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    
+                                    <!-- Describe your skills -->
+                                    <div>
+                                        <h3>Experience</h3>
+                                    </div>
+                                        <div class="form-row">
+                                                <div class="col-md-9">
+                                                    <div class="form-group">
+                                                            {{ form.experience.errors }}
+                                                            {{ form.experience }}
+                                                    </div>
+                                                </div>
+                                        </div>
+                                        <div>
+                                            <h3>Publication</h3>
+                                        </div>
+                                            <div class="form-row">
+                                                <div class="col-md-9">
+                                                    <div class="form-group">
+                                                            {{ form.publication.errors }}
+                                                            {{ form.publication }}
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        <button type="submit" class="btn btn-primary">Submit Application</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </section>
+
+{% endblock %}

@@ -1,0 +1,71 @@
+/* CSS */
+
+/* NAVIGATION SECTION */
+#nav-section-1 {
+	background-color: #1e73be;
+	height: 35px;
+}
+
+#nav-section-2 {
+	background-color: #ffca3e;
+	color: #fff;
+}
+
+/* FOOTER */
+#min-footer {
+	height: 8px;
+	background-color: #1e73be;
+}
+
+/* DIRECTORATE HUMAN RESOURCE SECTION */
+.hero-wrap {
+	width: 100%;
+	height: 100%;
+	position: inherit;
+	background-size: cover !important;
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: top center;
+	position: relative;
+}
+@media (max-width: 991.98px) {
+	.hero-wrap {
+		background-position: top center !important;
+	}
+}
+/* .hero-wrap .overlay {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	content: '';
+	opacity: .8;
+	background: #fff;
+} */
+.hero-wrap.hero-wrap-2 {
+	height: 300px;
+}
+.hero-wrap.hero-wrap-2 .slider-text {
+	height: 300px;
+}
+.hero-wrap.hero-wrap-2 .slider-text .bread {
+	font-weight: 900;
+	color: #fff;
+}
+.hero-wrap.hero-wrap-2 .slider-text .breadcrumbs {
+	text-transform: uppercase;
+	font-size: 13px;
+	letter-spacing: 1px;
+}
+.hero-wrap.hero-wrap-2 .slider-text .breadcrumbs span {
+	color: #fff;
+	border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+}
+.hero-wrap.hero-wrap-2 .slider-text .breadcrumbs span a {
+	color: #fff;
+}
+
+.text-down {
+	padding-top: 120px;
+}

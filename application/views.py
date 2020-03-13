@@ -24,23 +24,28 @@ def home(request):
     return render(request, 'application/home.html', {'jobs': jobs})
 
 def submit_form(request):
-    if request.method == 'POST':
-        request.POST._mutable = True
-        date_of_birth = request.POST.get('date_of_birth')
-        newage = int(calculateAge(datetime.strptime(date_of_birth, '%Y-%m-%d').date()))
-        request.POST['age'] = newage
-        form = JobForm(request.POST)
-        if  form.is_valid():
-            # form.cleaned_data['age'] = 
-            print(form.cleaned_data['date_of_birth'])
-            form.save()
-            messages.success(request, ('Submitted Successfully'))
-            return redirect('home')
-        else:
+    request.POST._mutable = True
+    position = request.GET.get('position')
+    if position:
+        if request.method == 'POST':
+            request.POST._mutable = True
+            date_of_birth = request.POST.get('date_of_birth')
+            newage = int(calculateAge(datetime.strptime(date_of_birth, '%Y-%m-%d').date()))
+            request.POST['age'] = newage
             form = JobForm(request.POST)
+            if  form.is_valid():
+                # form.cleaned_data['age'] = 
+                print(form.cleaned_data['date_of_birth'])
+                form.save()
+                messages.success(request, ('Submitted Successfully'))
+                return redirect('home')
+            else:
+                form = JobForm(request.POST)
+        else:
+            form = JobForm()
+        context = {'form': form}
+        print(request.GET.get('position'))
+        context['form'].fields['position'].initial = request.GET.get('position')
+        return render(request, 'application/form.html', context)
     else:
-        form = JobForm()
-    context = {'form': form}
-    print(request.GET.get('position'))
-    context['form'].fields['position'].initial = request.GET.get('position')
-    return render(request, 'application/form.html', context)
+        return redirect('home')

@@ -25,8 +25,7 @@ def home(request):
 
 def submit_form(request):
     request.POST._mutable = True
-    position = request.GET.get('position')
-    if position:
+    if (request.POST.get('position')) or (request.GET.get('position')):
         if request.method == 'POST':
             request.POST._mutable = True
             date_of_birth = request.POST.get('date_of_birth')

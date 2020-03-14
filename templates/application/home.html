@@ -3,16 +3,16 @@
 {% block content %}
     {% include "includes/header.html" %}
     {% if messages %}
-    {% for message in messages %}
-    <div class="container">
-            <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <small><sup>x</sup></small>
-                </button>
-                {{ message }}
-            </div>
-    </div>      
-    {% endfor %}
+        {% for message in messages %}
+        <div class="container">
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <small><sup>x</sup></small>
+                    </button>
+                    {{ message }}
+                </div>
+        </div>      
+        {% endfor %}
     {% endif %}
                    <!-- BODY -->
         <section class="py-5">

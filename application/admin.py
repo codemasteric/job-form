@@ -17,7 +17,7 @@ def some_streaming_csv_view(request, queryset):
     # rows that can be handled by a single sheet in most spreadsheet
     # applications.
     # selected = queryset.values_list('first_name', flat=True)
-    rows = (["Row {}".format(idx), str(idx)] for idx in queryset.values())
+    rows = ([str(idx)] for idx in queryset.values())
     pseudo_buffer = Echo()
     writer = csv.writer(pseudo_buffer)
     response = StreamingHttpResponse((writer.writerow(row) for row in rows),

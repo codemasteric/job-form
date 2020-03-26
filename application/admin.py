@@ -1,41 +1,47 @@
 from django.contrib import admin
 from .models import Job, Application
 import csv
-from django.http import StreamingHttpResponse
+from django.http import HttpResponse
 
-class Echo:
-    """An object that implements just the write method of the file-like
-    interface.
+def export_as_csv_action(description="Export selected objects as CSV file",
+                         fields=None, exclude=None, header=True):
     """
-    def write(self, value):
-        """Write the value by returning it, instead of storing in a buffer."""
-        return value
-
-def some_streaming_csv_view(request, queryset):
-    """A view that streams a large CSV file."""
-    # Generate a sequence of rows. The range is based on the maximum number of
-    # rows that can be handled by a single sheet in most spreadsheet
-    # applications.
-    # selected = queryset.values_list('first_name', flat=True)
-    rows = ([str(idx)] for idx in queryset.values())
-    pseudo_buffer = Echo()
-    writer = csv.writer(pseudo_buffer)
-    response = StreamingHttpResponse((writer.writerow(row) for row in rows),
-                                     content_type="text/csv")
-    response['Content-Disposition'] = 'attachment; filename="applications.csv"'
-    return response
+    This function returns an export csv action
+    'fields' and 'exclude' work like in django ModelForm
+    'header' is whether or not to output the column names as the first row
+    """
+    def export_as_csv(modeladmin, request, queryset):
+        """
+        Generic csv export admin action.
+        based on http://djangosnippets.org/snippets/1697/
+        """
+        opts = modeladmin.model._meta
+        field_names = set([field.name for field in opts.fields])
+        if fields:
+            fieldset = set(fields)
+            field_names = field_names & fieldset
+        elif exclude:
+            excludeset = set(exclude)
+            field_names = field_names - excludeset
+        
+        response = HttpResponse(content_type='text/csv')
+        response['Content-Disposition'] = 'attachment; filename=%s.csv' % str(opts).replace('.', '_')
+        
+        writer = csv.writer(response)
+        if header:
+            writer.writerow(field_names)
+        for obj in queryset:
+            writer.writerow([getattr(obj, field) for field in field_names])
+        return response
+    export_as_csv.short_description = description
+    return export_as_csv
 
 class ApplicationAdmin(admin.ModelAdmin):
     list_display = ('first_name', 'last_name','gender','age','position','email_address','phone')
     list_filter = ['position','gender']
     search_fields = ['first_name', 'last_name','position','experience','training','publication']
 
-    actions = ['make_published']
-
-    def make_published(self, request, queryset):
-        response = some_streaming_csv_view(request,queryset)
-        return response
-    make_published.short_description = "Export to a csv File"
+    actions = [export_as_csv_action("Export selected objects as CSV file", fields=['first_name', 'last_name','gender','age','position','email_address','phone'], header=True),]
 
 admin.site.register(Application,ApplicationAdmin)
 

@@ -23,11 +23,11 @@
                                 <div class="card">
                                     <div class="card-body">
                                         <h3 class="card-title">{{ job.job_title }}</h3>
-                                        <p class="card-text">Submission deadline is on friday 5pm {{ job.job_deadline_date }} click <a href="{{ job.details_link }}">here</a> to read more</p>
+                                        <p class="card-text">Submission deadline is on friday 5pm {{ job.job_deadline_date }} click <a href="{{ job.details_link }}" target="_blank">here</a> to read more</p>
                                         <form action="{% url 'submit_form' %}" method="get">
                                                 {% csrf_token %}
                                             <input type='hidden' name="position" value="{{ job.job_title }}" >
-                                            <button type="submit" class="btn btn-primary rounded-pill">Apply</button>
+                                            <button type="submit" class="btn btn-primary rounded-pill" style="background-color: #1e73be;">Apply</button>
                                         </form>
                                     </div>
                                 </div>
